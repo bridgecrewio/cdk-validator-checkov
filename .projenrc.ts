@@ -27,4 +27,7 @@ const project = new cdk.JsiiProject({
     'aws-cdk-lib@^2.73.0',
   ],
 });
+
+project.gitignore.exclude('.idea');
+
 project.synth();
