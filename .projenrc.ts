@@ -1,16 +1,30 @@
 import { cdk } from 'projen';
+import { NpmAccess } from 'projen/lib/javascript';
 const project = new cdk.JsiiProject({
-  author: 'gruebel',
-  authorAddress: 'anton.gruebel@gmail.com',
+  author: 'bridgecrew',
+  authorAddress: 'meet@bridgecrew.io',
   defaultReleaseBranch: 'main',
   jsiiVersion: '~5.0.0',
-  name: 'cdk-validator-checkov',
+  name: '@bridgecrew/cdk-validator-checkov',
   projenrcTs: true,
-  repositoryUrl: 'https://github.com/anton.gruebel/cdk-validator-checkov.git',
-
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+  repositoryUrl: 'https://github.com/bridgecrewio/cdk-validator-checkov.git',
+  keywords: [
+    'cdk',
+    'validator',
+    'policy as code',
+  ],
+  npmAccess: NpmAccess.PUBLIC,
+  release: true,
+  publishToPypi: {
+    distName: 'cdk-validator-checkov',
+    module: 'cdk_validator_checkov',
+  },
+  devDeps: [
+    'aws-cdk-lib@^2.73.0',
+    'constructs',
+  ],
+  peerDeps: [
+    'aws-cdk-lib@^2.73.0',
+  ],
 });
 project.synth();
