@@ -83,10 +83,10 @@ describe('CheckovValidator', () => {
     const rules = Object.fromEntries(
       report.pluginReports.flatMap((r: PluginReportJson) => r.violations).map((v: PolicyViolationBeta1) => [v.ruleName, v.violatingResources]),
     );
-    expect(Object.keys(rules)).toEqual([
+    expect(Object.keys(rules).sort()).toEqual([
       'CKV_AWS_18',
       'CKV_AWS_21',
-    ]);
+    ].sort());
   });
 
   test('synth succeeds with skipCheck property', () => {

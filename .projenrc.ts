@@ -26,8 +26,15 @@ const project = new cdk.JsiiProject({
   peerDeps: [
     'aws-cdk-lib@^2.73.0',
   ],
+  githubOptions: {
+    pullRequestLintOptions: {
+      runsOn: ['self-hosted', 'public', 'linux', 'x64'],
+    },
+  },
 });
 
 project.gitignore.exclude('.idea');
+
+project.addScripts({ postinstall: 'pip install -U checkov' });
 
 project.synth();
