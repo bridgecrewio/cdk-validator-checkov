@@ -13,7 +13,11 @@ on:
 jobs:
   validate:
     name: Validate PR title
-    runs-on: ubuntu-latest
+    runs-on:
+      - self-hosted
+      - public
+      - linux
+      - x64
     permissions:
       pull-requests: write
     steps:
