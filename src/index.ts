@@ -1,1 +1,1 @@
-export { CheckovValidator } from './plugin';
+export { CheckovValidator, CheckovValidatorProps } from './plugin';
