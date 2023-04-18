@@ -28,7 +28,7 @@
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
     "projen": "npx projen",
-    "postinstall": "pip install -U checkov"
+    "postinstall": "[ \"$(command -v checkov)\" ] && exit 0; pip install -U checkov"
   },
   "author": {
     "name": "bridgecrew",
