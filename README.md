@@ -33,6 +33,22 @@ pip install cdk-validator-checkov
 
 To use this plugin in your CDK application add it to the CDK App.
 
+### Python
+
+```python
+from cdk_validator_checkov import CheckovValidator
+
+...
+
+App(
+  policy_validation_beta1=[
+    CheckovValidator()
+  ]
+)
+```
+
+### TypeScript
+
 ```ts
 new App({
   policyValidationBeta1: [
