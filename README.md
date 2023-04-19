@@ -46,13 +46,13 @@ By default, the `CheckovValidator` plugin comes with all `checkov`
 In order to disable any of the checks or just run a subset of them you can use the `check` or `skipCheck` property.
 
 ```ts
-new CfnGuardValidator({
+new CheckovValidator({
     check: ['CKV_AWS_18', 'CKV_AWS_21'],
 });
 ```
 
 ```ts
-new CfnGuardValidator({
+new CheckovValidator({
     skipCheck: ['CKV_AWS_18', 'CKV_AWS_21'],
 });
 ```
