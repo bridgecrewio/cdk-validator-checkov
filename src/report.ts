@@ -77,6 +77,8 @@ export function processReport(report: Report): PolicyValidationPluginReportBeta1
     }
   });
 
+  console.log(`More details: ${report.url}\n`);
+
   return {
     pluginVersion,
     success,

@@ -32,8 +32,6 @@ export class CheckovValidator implements IPolicyValidationPluginBeta1 {
   private readonly check: string[];
   private readonly skipCheck: string[];
 
-  private templatePaths: string[] = [];
-
   constructor(props: CheckovValidatorProps = {}) {
     this.name = 'cdk-validator-checkov';
 
@@ -43,12 +41,10 @@ export class CheckovValidator implements IPolicyValidationPluginBeta1 {
   }
 
   validate(context: IPolicyValidationContextBeta1): PolicyValidationPluginReportBeta1 {
-    this.templatePaths = context.templatePaths;
-
-    return this.execCheckov();
+    return this.execCheckov(context.templatePaths);
   }
 
-  private execCheckov(): PolicyValidationPluginReportBeta1 {
+  private execCheckov(templatePaths: string[]): PolicyValidationPluginReportBeta1 {
     const flags = [
       '--framework',
       'cloudformation',
@@ -58,7 +54,7 @@ export class CheckovValidator implements IPolicyValidationPluginBeta1 {
       '--soft-fail',
     ];
 
-    this.templatePaths.forEach((templatePath) => {
+    templatePaths.forEach((templatePath) => {
       flags.push('-f');
       flags.push(templatePath);
     });
@@ -83,7 +79,7 @@ export class CheckovValidator implements IPolicyValidationPluginBeta1 {
 
       return processReport(report);
     } catch (e) {
-      console.error(`checkov plugin failed to scan the given templates. Error: ${e}`);
+      console.error(`checkov plugin failed to scan the given templates. ${e}`);
 
       return {
         success: false,
