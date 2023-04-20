@@ -35,6 +35,6 @@ const project = new cdk.JsiiProject({
 
 project.gitignore.exclude('.idea');
 
-project.addScripts({ postinstall: 'pip install -U checkov' });
+project.addScripts({ postinstall: '[ \"$(command -v checkov)\" ] && exit 0; pip install -U checkov' });
 
 project.synth();

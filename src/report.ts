@@ -40,7 +40,7 @@ export function processReport(report: Report): PolicyValidationPluginReportBeta1
   if ('checkov_version' in report) {
     // empty result
     return {
-      pluginVersion: report.checkov_version as string,
+      pluginVersion: report.checkov_version!.toString(),
       success: true,
       violations: [],
     };
@@ -51,7 +51,7 @@ export function processReport(report: Report): PolicyValidationPluginReportBeta1
   const violationsMap: Record<string, PolicyViolationBeta1> = {};
 
   report.results.failed_checks.forEach((check) => {
-    const violation: PolicyViolationBeta1 = {
+    const violation = {
       ruleName: check.check_id,
       description: check.check_name,
       violatingResources: [{
@@ -64,7 +64,7 @@ export function processReport(report: Report): PolicyValidationPluginReportBeta1
       ruleMetadata: {
         DocumentationUrl: check.guideline,
       },
-    };
+    } satisfies PolicyViolationBeta1;
 
     if (check.check_id in violationsMap) {
       violationsMap[check.check_id].violatingResources.push({
@@ -76,6 +76,8 @@ export function processReport(report: Report): PolicyValidationPluginReportBeta1
       violationsMap[check.check_id] = violation;
     }
   });
+
+  console.log(`More details: ${report.url}\n`);
 
   return {
     pluginVersion,
