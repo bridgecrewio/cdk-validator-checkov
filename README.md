@@ -33,6 +33,39 @@ pip install cdk-validator-checkov
 
 To use this plugin in your CDK application add it to the CDK App.
 
+### Python
+
+```python
+from cdk_validator_checkov import CheckovValidator
+
+...
+
+App(
+  policy_validation_beta1=[
+    CheckovValidator()
+  ]
+)
+```
+
+By default, the `CheckovValidator` plugin comes with all `checkov`
+[built-in checks for CloudFormation](https://www.checkov.io/5.Policy%20Index/cloudformation.html).
+In order to disable any of the checks or just run a subset of them you can use the `check` or `skipCheck` property.
+
+```python
+CheckovValidator(
+  check= ['CKV_AWS_18', 'CKV_AWS_21']
+)
+```
+
+```python
+CheckovValidator(
+  skipCheck= ['CKV_AWS_18', 'CKV_AWS_21']
+}
+```
+
+
+### TypeScript
+
 ```ts
 new App({
   policyValidationBeta1: [
@@ -41,15 +74,15 @@ new App({
 });
 ```
 
-By default, the `CheckovValidator` plugin comes with all `checkov`
-[built-in checks for CloudFormation](https://www.checkov.io/5.Policy%20Index/cloudformation.html).
-In order to disable any of the checks or just run a subset of them you can use the `check` or `skipCheck` property.
+Specify checks:
 
 ```ts
 new CheckovValidator({
     check: ['CKV_AWS_18', 'CKV_AWS_21'],
 });
 ```
+
+Skip checks:
 
 ```ts
 new CheckovValidator({
