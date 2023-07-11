@@ -89,3 +89,7 @@ new CheckovValidator({
     skipCheck: ['CKV_AWS_18', 'CKV_AWS_21'],
 });
 ```
+
+### Troubleshooting
+
+If you are getting `Error: spawnSync checkov ENOBUFS` error, please try to set `CHECKOV_MAX_BUFFER_SIZE_MB` environment variable to numeric value above 1. It's setting `maxBuffer` parameter for `spawnSync` [function](https://nodejs.org/api/child_process.html#child_processspawnsynccommand-args-options) under the hood.
