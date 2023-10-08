@@ -12,6 +12,7 @@ export function exec(commandLine: string[], options: { cwd?: string; json?: bool
       ...options.env,
     },
     cwd: options.cwd,
+    maxBuffer: 1024 * 1024 * (parseInt(process.env['CHECKOV_MAX_BUFFER_SIZE_MB']) || 1),
   });
 
   if (proc.error) { throw proc.error; }
